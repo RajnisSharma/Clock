@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stylish Digital Clock</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom, #1a2a6c, #b21f1f, #fdbb2d);
+            color: white;
+        }
+        .clock {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px 40px;
+            border-radius: 10px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        .clock span {
+            font-size: 4rem;
+            display: inline-block;
+            margin: 0 5px;
+        }
+        .clock span.ampm {
+            font-size: 1.5rem;
+            vertical-align: top;
+        }
+        @media (max-width: 576px) {
+            .clock span {
+                font-size: 2rem;
+            }
+            .clock span.ampm {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="clock">
+        <span id="hours">00</span>
+        <span>:</span>
+        <span id="minutes">00</span>
+        <span>:</span>
+        <span id="seconds">00</span>
+        <span class="ampm" id="ampm">AM</span>
+    </div>
+
+    <script>
+        function updateClock() {
+            const clock = new Date();
+            let hours = clock.getHours();
+            const minutes = clock.getMinutes();
+            const seconds = clock.getSeconds();
+            const ampm = hours >= 12 ? "PM" : "AM";
+
+            hours = hours % 12 || 12; // Convert to 12-hour format
+            document.getElementById("hours").textContent = hours.toString().padStart(2, "0");
+            document.getElementById("minutes").textContent = minutes.toString().padStart(2, "0");
+            document.getElementById("seconds").textContent = seconds.toString().padStart(2, "0");
+            document.getElementById("ampm").textContent = ampm;
+        }
+
+        setInterval(updateClock, 1000);
+        updateClock(); // Initial call to display the time immediately
+    </script>
+</body>
+</html>
